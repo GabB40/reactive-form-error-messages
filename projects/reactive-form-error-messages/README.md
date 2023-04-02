@@ -1,24 +1,27 @@
-# ReactiveFormErrorMessages
+# reactive-form-error-message
+Lib for handling the display of Angular Reactive Forms Error Messages.
+Angular compatibility  : **v15+**
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+## Installation: 
+`npm install @gabb40/reactive-form-error-messages`
 
-## Code scaffolding
+## Simple Use
+[See demo project](https://github.com/GabB40/reactive-form-error-messages)
 
-Run `ng generate component component-name --project reactive-form-error-messages` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project reactive-form-error-messages`.
-> Note: Don't forget to add `--project reactive-form-error-messages` or else it will be added to the default project in your `angular.json` file. 
-
-## Build
-
-Run `ng build reactive-form-error-messages` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build reactive-form-error-messages`, go to the dist folder `cd dist/reactive-form-error-messages` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test reactive-form-error-messages` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Import **ReactiveFormErrorMessagesComponent** into your NgModule
+`@NgModule({
+  imports: [..., ReactiveFormsModule, ...]
+})`
+2. In **each of** yours components, provide **ReactiveFormErrorMessagesService**
+`@Component({
+  ...,
+  providers: [ReactiveFormErrorMessagesService] 
+})`
+3. Inject **ReactiveFormErrorMessagesService** into your component
+`constructor(..., private reactiveFormErrorMessagesService: ReactiveFormErrorMessagesService) { }`
+4. Set config (you need at least to pass the concerned FormGroup)
+`this.reactiveFormErrorMessagesService.setConfig({ formGroup: this.componentFormGroup, ...otherOptions});`
+5. Set HTML at desired place. Eg : 
+`<label for="name">Name</label>`
+`<input type="text" id="name" name="name" formControlName="name">`
+`<reactive-form-error-messages formCtrlName="name" label="(optional) A different label than 'Name' (auto uppercase first letter)" />`
