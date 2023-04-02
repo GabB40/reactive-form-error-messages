@@ -14,4 +14,5 @@ export interface ReactiveFormErrorMessagesConfig {
   customValidators?: ErrorMessage[];
   patternMessages?: PatternMessages[];
   debounceTime?: number;
+  errorMessages?: ErrorMessage[];
 }

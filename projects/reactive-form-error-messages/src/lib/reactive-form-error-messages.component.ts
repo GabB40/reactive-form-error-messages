@@ -25,7 +25,7 @@ export class ReactiveFormErrorMessagesComponent implements OnInit {
   @Input() formCtrlName!: string;
 
   /** Optionals inputs */
-  @Input() label: string | null = null;
+  @Input() label!: string;
   @Input() formArrIndex: number | null = null;
   @Input() formArrName: string | null = null;
   @Input() messagesCountLimit?: number;
@@ -80,40 +80,7 @@ export class ReactiveFormErrorMessagesComponent implements OnInit {
   }
 
   getErrors(): ErrorMessage[] {
-    let errorMessages: ErrorMessage[] = [
-      {
-        validatorName: 'required',
-        message: `${this.label} is required`
-      },
-      {
-        validatorName: 'minlength',
-        message: `${this.label} must have at least
-          ${this.formControl?.errors?.['minlength']?.['requiredLength']} characters
-          (currently ${this.formControl?.errors?.['minlength']?.['actualLength']} characters)`
-      },
-      {
-        validatorName: 'maxlength',
-        message: `${this.label} must have at most
-          ${this.formControl?.errors?.['maxlength']?.['requiredLength']} characters 
-          (currently ${this.formControl?.errors?.['maxlength']?.['actualLength']} characters)`
-      },
-      {
-        validatorName: 'min',
-        message: `${this.label} must be greater than ${this.formControl?.errors?.['min']?.['min']}`
-      },
-      {
-        validatorName: 'max',
-        message: `${this.label} must be lower than ${this.formControl?.errors?.['max']?.['max']}`
-      },
-      {
-        validatorName: 'email',
-        message: `Invalid email format`
-      },
-      {
-        validatorName: 'pattern',
-        message: this.getPatternMessage(this.formControl?.errors?.['pattern']?.['requiredPattern'])
-      }
-    ];
+    let errorMessages: ErrorMessage[] = this.reactiveFormErrorMessagesService.getErrorMessages(this.label, this.formControl?.errors);
 
     // handle thisValidatorOnly
     if (this.thisValidatorOnly) {
@@ -134,11 +101,6 @@ export class ReactiveFormErrorMessagesComponent implements OnInit {
     }, [...<[]>this.config.customValidators]);
 
     return this.formControl?.errors ? reducedErrorMessages.filter((err: ErrorMessage) => this.formControl?.errors?.hasOwnProperty(err.validatorName)) : [];
-  }
-
-  getPatternMessage(requiredPattern: string | RegExp): string {
-    return [...<[]>this.config.patternMessages, ...ReactiveFormErrorMessagesRegex.PATTERN_MESSAGES]
-      .find(p => p.pattern == requiredPattern)?.message ?? `Invalid format (required pattern /${requiredPattern}/)`;
   }
 
   excludedValidatorsHandler(errorArray: ErrorMessage[] | null): ErrorMessage[] | [] {
