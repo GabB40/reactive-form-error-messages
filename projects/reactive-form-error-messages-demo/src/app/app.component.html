@@ -1,0 +1,25 @@
+<h1>Multi Store</h1>
+<nav>
+    <a routerLink=""> Home </a>
+    <a routerLink="multistore/child1"> Child1 </a>
+    <a routerLink="multistore/child2"> Child2 </a>
+</nav>
+<router-outlet></router-outlet>
+<br>
+<div>
+    <div>
+        <strong>child1:</strong> name = <em>{{ nameChild1$ | async }}</em> - version = <em>{{ versionChild1$ | async }}</em>
+        &nbsp;
+        [<small *ngFor="let todo of todosChild1$ | async">
+            &nbsp;todo : '{{ todo.todo }}' - priority: {{ todo.priority }};&nbsp;
+        </small>]
+    </div>
+    <br>
+    <div>
+        <strong>child2:</strong> name = <em>{{ nameChild2$ | async }}</em> - version = <em>{{ versionChild2$ | async }}</em>
+        &nbsp;
+        [<small *ngFor="let todo of todosChild2$ | async">
+            &nbsp;todo : '{{ todo.todo }}' - priority: {{ todo.priority }};&nbsp;
+        </small>]
+    </div>
+</div>

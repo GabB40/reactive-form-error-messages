@@ -1,0 +1,28 @@
+{
+  "name": "@gabb40/reactive-form-error-messages",
+  "version": "0.1.0",
+  "descripion": "Handle displaying error messages on Angular Reactive Form",
+  "keywords": [
+    "angular",
+    "reactive forms",
+    "error messages"
+  ],
+  "author": "GabB40 <gabb40.dev@gmail.com>",
+  "licence": "MIT",
+  "homepage": "https://github.com/gabb40/reactive-form-error-messages",
+  "peerDependencies": {
+    "@angular/common": "^15.2.0",
+    "@angular/core": "^15.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GabB40/reactive-form-error-messages.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "sideEffects": false
+}
