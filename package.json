@@ -1,11 +1,12 @@
 {
   "name": "reactive-form-error-messages",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build reactive-form-error-messages --configuration production",
     "watch": "ng build reactive-form-error-messages --watch --configuration development",
+    "publish": "cd dist/reactive-form-error-messages && npm publish",
     "test": "ng test"
   },
   "private": true,

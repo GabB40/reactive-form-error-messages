@@ -11,8 +11,8 @@
   "licence": "MIT",
   "homepage": "https://github.com/gabb40/reactive-form-error-messages",
   "peerDependencies": {
-    "@angular/common": "^15.2.0",
-    "@angular/core": "^15.2.0"
+    "@angular/common": "^12.0.0",
+    "@angular/core": "^12.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
