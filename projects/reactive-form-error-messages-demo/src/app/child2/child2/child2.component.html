@@ -1,18 +1,19 @@
 <h2>Child 2</h2>
+<em>Display error messages on input</em>
 <form [formGroup]="formChild2" (ngSubmit)="onSubmit()" [bindFormData]="formData$ | async">
     <p>
         <label for="name">Name </label>
         <input type="text" id="name" name="name" formControlName="name">
-        <reactive-form-error-messages formCtrlName="name"></reactive-form-error-messages>
+        <reactive-form-error-messages formCtrlName="name" />
     </p>
     <p>
         <label for="version">Version </label>
         <input type="text" id="version" name="version" formControlName="version">
-        <reactive-form-error-messages formCtrlName="version" label="Version Number" style="color: tomato; font-weight: 500;"></reactive-form-error-messages>
+        <reactive-form-error-messages formCtrlName="version" label="Version Number" style="color: red; font-weight: 500;" />
     </p>
 
-    <p><button type="button" (click)="onAddTodo()">Ajouter une tâche</button></p>
-    <p *ngIf="hasMaxTodosError" class="alert">{{ maxTodos }} todos max !</p>
+    <p><button type="button" (click)="onAddTodo()">Add Todo</button></p>
+    <p *ngIf="hasMaxTodosError" class="alert">Max {{ maxTodos }} Todo!</p>
 
     <ng-container formArrayName="todos">
         <div *ngFor="let todoForm of todos.controls; index as i" [formGroupName]="i">
@@ -20,16 +21,16 @@
             <p>
                 <label for="todo">Todo </label>
                 <input type="text" id="todo" name="todo" formControlName="todo" ngDefaultControl>
-                <reactive-form-error-messages formCtrlName="todo" formArrName='todos' [formArrIndex]='i' class="alert"></reactive-form-error-messages>
+                <reactive-form-error-messages formCtrlName="todo" formArrName="todos" [formArrIndex]="i" class="alert" />
             </p>
             <p>
                 <label for="priority">Priority </label>
                 <input type="number" id="priority" name="priority" formControlName="priority">
-                <reactive-form-error-messages formCtrlName="priority" formArrName='todos' [formArrIndex]='i' class="alert"></reactive-form-error-messages>
+                <reactive-form-error-messages formCtrlName="priority" formArrName='todos' [formArrIndex]='i' class="alert" />
             </p>
             <hr>
         </div>
     </ng-container>
 
-    <p><button type="submit" [disabled]="!formChild2.valid">Valider</button></p>
+    <p><button type="submit" [disabled]="!formChild2.valid">Submit</button></p>
 </form>

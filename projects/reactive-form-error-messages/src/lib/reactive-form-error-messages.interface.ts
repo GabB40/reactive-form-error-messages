@@ -1,5 +1,5 @@
 import { FormGroup } from "@angular/forms";
-import { PatternMessages } from './reactive-form-error-messages.regex';
+import { PatternMessage } from './reactive-form-error-messages.regex';
 
 export interface ErrorMessage {
   validatorName: string;
@@ -12,7 +12,7 @@ export interface ReactiveFormErrorMessagesConfig {
   exclude?: string | string[];
   thisValidatorOnly?: string | null;
   customValidators?: ErrorMessage[];
-  patternMessages?: PatternMessages[];
+  patternMessages?: PatternMessage[];
   debounceTime?: number;
   errorMessages?: ErrorMessage[];
 }

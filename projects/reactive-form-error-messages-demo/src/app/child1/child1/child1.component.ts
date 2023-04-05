@@ -18,7 +18,6 @@ export class Child1Component implements OnInit {
   formData$ = this.store.select(selectChild1Data);
   maxTodos = 3;
   hasMaxTodosError: boolean = false;
-  maxLength = 99;
 
   constructor(
     private store: Store,
@@ -29,12 +28,14 @@ export class Child1Component implements OnInit {
   ngOnInit(): void {
     this.formChild1 = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8), Validators.pattern(ReactiveFormErrorMessagesRegex.ALNUM)]],
-      version: ['', [Validators.required, smallerThan10(), smallerThan30(), Validators.min(5), Validators.max(this.maxLength), Validators.pattern('^(0|[1-9][0-9]*)$')]],
+      version: ['', [Validators.required, smallerThan10(), smallerThan30(), Validators.min(5), Validators.max(99), Validators.pattern('^(0|[1-9][0-9]*)$')]],
       todos: this.formBuilder.array(
         [],
         [Validators.maxLength(this.maxTodos)]
       )
-    });
+    },
+    { updateOn: 'submit'}
+    );
 
     const customValidators: ErrorMessage[] = [
       { validatorName: 'smallerThan10', message: 'It\'s smaller than 10' },
@@ -44,9 +45,9 @@ export class Child1Component implements OnInit {
     this.reactiveFormErrorMessagesService.setConfig({
       formGroup: this.formChild1,
       customValidators,
-      messagesCountLimit: 1,
+      messagesCountLimit: 3,
+      errorMessages: this.customErrorMessages,
       // thisValidatorOnly: 'smallerThan30',
-      errorMessages: this.customErrorMessages
     });
   }
 
@@ -73,14 +74,45 @@ export class Child1Component implements OnInit {
   onSubmit() {
     if (this.formChild1.valid)
       this.store.dispatch(updateData({ ...initialState, ...this.formChild1.value }));
+    // ESSENTIAL line code when use reactive-form-error-messages on submit only
     else this.reactiveFormErrorMessagesService.emitValueChanges(this.formChild1);
   }
 
   private get customErrorMessages() {
     return [
-      {validatorName: 'required', message: 'Le champ {{label}} est obligatoire'},
-      {validatorName: 'max', message: `Pas plus grand que ${this.maxLength}`},
-    ]
+      {
+        validatorName: 'required',
+        message: `{{label}} est obligatoire`
+      },
+      {
+        validatorName: 'minlength',
+        message: `{{label}} doit avoir au minimum
+          {{requiredLength}} caractères
+          (Actuellement {{actualLength}} caractères)`
+      },
+      {
+        validatorName: 'maxlength',
+        message: `{{label}} doit avoir au maximum
+          {{requiredLength}} caractères 
+          (Actuellement {{actualLength}} caractères)`
+      },
+      {
+        validatorName: 'min',
+        message: `{{label}} doit être égal ou supérieur à {{min}}`
+      },
+      {
+        validatorName: 'max',
+        message: `{{label}} doit être égal ou inférieur à {{max}}`
+      },
+      {
+        validatorName: 'email',
+        message: `Format de mail invalide`
+      },
+      {
+        validatorName: 'pattern',
+        message: 'Ne répond pas au format {{requiredPattern}}'
+      }
+    ];
   }
 
 }

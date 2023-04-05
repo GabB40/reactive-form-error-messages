@@ -1,6 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-reactive-form-error-messages {
-  display: block; color: orangered; font-weight: 500; font-size: small; margin-top: 0.5em;
+body {
+  background-color: rgb(247, 240, 228);
+  h2 {
+    margin-bottom: 0;
+  }
+}
+
+.reactive-form-error-message {
+  color: orangered; font-weight: 500; font-size: small; margin-top: 0.5em;
 }
 
 .alert {

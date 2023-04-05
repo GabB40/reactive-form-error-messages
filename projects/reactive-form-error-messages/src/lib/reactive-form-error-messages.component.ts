@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, Observable } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { ErrorMessage, ReactiveFormErrorMessagesConfig } from './reactive-form-error-messages.interface';
-import { PatternMessages, ReactiveFormErrorMessagesRegex } from './reactive-form-error-messages.regex';
+import { PatternMessage } from './reactive-form-error-messages.regex';
 import { ReactiveFormErrorMessagesService } from './reactive-form-error-messages.service';
 
 
@@ -15,7 +15,7 @@ import { ReactiveFormErrorMessagesService } from './reactive-form-error-messages
   template: `
     <ng-container *ngFor="let errorMessage of errorMessages$ | async; index as i">
       <ng-container *ngIf="!messagesCountLimit || i < messagesCountLimit">
-        {{ errorMessage.message }}
+        <div class="reactive-form-error-message">{{ errorMessage.message }}</div>
       </ng-container>
     </ng-container>
   `
@@ -32,7 +32,7 @@ export class ReactiveFormErrorMessagesComponent implements OnInit {
   @Input() exclude?: string | string[];
   @Input() thisValidatorOnly?: string | null;
   @Input() debounceTime?: number;
-  @Input() patternMessages?: PatternMessages[];
+  @Input() patternMessages?: PatternMessage[];
 
   private config!: ReactiveFormErrorMessagesConfig;
   private formControl!: AbstractControl | null;
@@ -59,7 +59,6 @@ export class ReactiveFormErrorMessagesComponent implements OnInit {
 
   setFormControl(): void {
     if (this.formArrName) {
-      console.log('setFormControl -> this.formArrName:', this.formArrName);
       if (this.formArrIndex === null) {
         console.error('Input formArrName is defined but formArrIndex isn\'t !');
         return;

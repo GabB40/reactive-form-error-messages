@@ -5,6 +5,8 @@ Angular compatibility  : **v15+**
 ## Installation: 
 `npm install @gabb40/reactive-form-error-messages`
 
+## Update:
+`ng update @gabb40/reactive-form-error-messages@latest`
 ## Simple Use
 [See demo project](https://github.com/GabB40/reactive-form-error-messages)
 

@@ -1,4 +1,4 @@
-export interface PatternMessages {
+export interface PatternMessage {
   pattern: string | RegExp,
   message: string
 }
@@ -53,7 +53,7 @@ export class ReactiveFormErrorMessagesRegex {
   /**
    * @Type { pattern: string | RegExp, message: string }[]
    */
-  public static readonly PATTERN_MESSAGES: PatternMessages[] = [
+  public static readonly PATTERN_MESSAGES: PatternMessage[] = [
     { pattern: ReactiveFormErrorMessagesRegex.ALPHA, message: 'Only alphabetic characters are allowed' },
     { pattern: ReactiveFormErrorMessagesRegex.ALPHALOW, message: 'Only lowercase alphabetic characters are allowed' },
     { pattern: ReactiveFormErrorMessagesRegex.ALPHAUPP, message: 'Only uppercase alphabetic characters are allowed' },

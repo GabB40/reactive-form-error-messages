@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { ErrorMessage, PatternMessages, ReactiveFormErrorMessagesRegex, ReactiveFormErrorMessagesService } from 'reactive-form-error-messages';
+import { ErrorMessage, PatternMessage, ReactiveFormErrorMessagesRegex, ReactiveFormErrorMessagesService } from 'reactive-form-error-messages';
 import { smallerThan10, smallerThan30 } from '../../validators';
 import { initialState } from '../store';
 import { updateData } from './../store/child2.actions';
@@ -41,7 +41,7 @@ export class Child2Component implements OnInit {
       { validatorName: 'required', message: 'You\'re a fucking genious !' } // eg: overwrite of a default error message
     ];
 
-    const patternMessages: PatternMessages[] = [
+    const patternMessages: PatternMessage[] = [
       { pattern: ReactiveFormErrorMessagesRegex.NUM, message: 'IMHO You just fail' },
       { pattern: ReactiveFormErrorMessagesRegex.ALNUM, message: 'BOUYAAAAAAAAA !' }
     ];
@@ -77,9 +77,9 @@ export class Child2Component implements OnInit {
   }
 
   onSubmit() {
-    console.log('onSubmit -> this.formChild2:', this.formChild2);
     if (this.formChild2.valid)
       this.store.dispatch(updateData({ ...initialState, ...this.formChild2.value }));
+    // optional security if disable attribute is removed on submit button
     else this.reactiveFormErrorMessagesService.emitValueChanges(this.formChild2);
   }
 
