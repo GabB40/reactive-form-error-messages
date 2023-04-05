@@ -1,6 +1,6 @@
 {
   "name": "@gabb40/reactive-form-error-messages",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "descripion": "Handle displaying error messages on Angular Reactive Form",
   "keywords": [
     "angular",
