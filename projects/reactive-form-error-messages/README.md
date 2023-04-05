@@ -1,6 +1,6 @@
 # reactive-form-error-message
 Lib for handling the display of Angular Reactive Forms Error Messages.
-Angular compatibility  : **v15+**
+Angular compatibility  : **v12+**
 
 ## Installation: 
 `npm install @gabb40/reactive-form-error-messages`
@@ -11,8 +11,9 @@ Angular compatibility  : **v15+**
 [See demo project](https://github.com/GabB40/reactive-form-error-messages)
 
 1. Import **ReactiveFormErrorMessagesComponent** into your NgModule
+`import { ReactiveFormErrorMessagesComponent } from '@gabb40/reactive-form-error-messages';`
 `@NgModule({
-  imports: [..., ReactiveFormsModule, ...]
+  imports: [..., ReactiveFormErrorMessagesComponent, ...]
 })`
 2. In **each of** yours components, provide **ReactiveFormErrorMessagesService**
 `@Component({
